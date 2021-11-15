@@ -1,4 +1,4 @@
-<h1>Developers COnnector</h1>
+<h1>Developers Connector</h1>
 <h2>A Social App To Connect Developers</h2>
 <p>This is a project as a tutorial by Brad Traversy</p>
 <p>
