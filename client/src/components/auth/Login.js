@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 const Login = () => {
-  return <div>Login</div>;
+  return <Fragment>Login</Fragment>;
 };
 
 export default Login;
