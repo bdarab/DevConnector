@@ -22,10 +22,18 @@ export const getCurrentProfile = () => async dispatch => {
 
 //Create or Update Profile
 export const createProfile =
-  (formData, navigate, edit = false) =>
-  async dispatch => {
+  (formData,
+    navigate,
+    edit = false
+  ) => async dispatch => {
     try {
-      const res = await api.post('/profile', formData);
+      const config = {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+
+      const res = await axios.post('/api/profile', formData, config);
 
       dispatch({
         type: GET_PROFILE,
