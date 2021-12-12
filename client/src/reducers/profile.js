@@ -32,6 +32,11 @@ export default function (state = initialState, action) {
         loading: false
       };
     case GET_PROFILES:
+      return {
+        ...state,
+        loading: false,
+        profiles: payload
+      };
     case PROFILE_ERROR:
       return {
         ...state,
