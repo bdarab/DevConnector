@@ -1,7 +1,0 @@
-{
-  "mongoURI": "mongodb+srv://bdarab:six390eve108@devconnector.79yh1.mongodb.net/conector?retryWrites=true&w=majority",
-
-  "PORT": 5000,
-
-  "jwtSecret": "This-is-my-jwt-secret-for-jsonwebtoken-and-why-not-there-it-is-here"
-}
