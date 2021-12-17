@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
@@ -10,10 +11,15 @@ const Profile = ({
   auth,
   match
 }) => {
+  const { id } = useParams();
   useEffect(() => {
-    getProfileById(match.params.id);
-  }, [getProfileById]);
-  return <div>profile</div>;
+    getProfileById(id);
+  }, [getProfileById, id]);
+  return (
+    <Fragment>
+      {profile === null || loading ? <Spinner /> : <Fragment>profile</Fragment>}
+    </Fragment>
+  );
 };
 
 Profile.propTypes = {

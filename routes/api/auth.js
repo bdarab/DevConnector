@@ -1,20 +1,20 @@
-const express = require('express');
-const router = express.Router();
-const { check, validationResult } = require('express-validator');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const auth = require('../../middleware/auth');
+import { Router } from 'express';
+const router = Router();
+import { check, validationResult } from 'express-validator';
+import { compare } from 'bcryptjs';
+import { sign } from 'jsonwebtoken';
+import auth from '../../middleware/auth';
 
-const User = require('../../models/User');
+import { findById, findOne } from '../../models/User';
 // Bringing-in jwtSecret
-const config = require('config');
+import { get } from 'config';
 
 // @route    GET api/auth
 // @desc     Test route
 // @access   Public
 router.get('/', auth, async (req, res) => {
   try {
-    const user = await User.findById(req.user.id).select('-password');
+    const user = await findById(req.user.id).select('-password');
     res.json(user);
   } catch (err) {
     console.error(err.message);
@@ -44,7 +44,7 @@ router.post(
 
     try {
       // Does user exists?
-      let user = await User.findOne({ email });
+      let user = await findOne({ email });
       if (!user) {
         return res
           .status(400)
@@ -52,7 +52,7 @@ router.post(
       }
 
       // Check for user's email & password
-      const isMatch = await bcrypt.compare(password, user.password);
+      const isMatch = await compare(password, user.password);
 
       if (!isMatch) {
         return res
@@ -67,15 +67,10 @@ router.post(
         }
       };
 
-      jwt.sign(
-        payload,
-        config.get('jwtSecret'),
-        { expiresIn: 360000 },
-        (err, token) => {
-          if (err) throw err;
-          res.json({ token });
-        }
-      );
+      sign(payload, get('jwtSecret'), { expiresIn: 360000 }, (err, token) => {
+        if (err) throw err;
+        res.json({ token });
+      });
     } catch (err) {
       console.log(err.message);
       res.status(500).send('Server Error');
@@ -83,4 +78,4 @@ router.post(
   }
 );
 
-module.exports = router;
+export default router;
