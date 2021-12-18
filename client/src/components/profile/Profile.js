@@ -1,9 +1,11 @@
 import React, { Fragment, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
 import { getProfileById } from '../../actions/profile';
+import ProfileTop from './ProfileTop';
+import ProfileAbout from './ProfileAbout';
 
 const Profile = ({
   getProfileById,
@@ -17,10 +19,30 @@ const Profile = ({
   }, [getProfileById, id]);
   return (
     <Fragment>
-      {profile === null || loading ? <Spinner /> : <Fragment>profile</Fragment>}
+      {profile === null || loading ? (
+        <Spinner />
+      ) : (
+        <Fragment>
+          <Link to="/profiles" className="btn btn-light">
+            Back To Profiles
+          </Link>
+          {auth.isAuthenticated &&
+            auth.loading === false &&
+            auth.user._id === profile.user._id && (
+              <Link to="/edit-profile" className="btn btn-dark">
+                Edit Profile
+              </Link>
+            )}
+          <div class="profile-grid my-1">
+              <ProfileTop profile={profile} />
+              <ProfileAbout profile={profile} />
+          </div>
+        </Fragment>
+      )}
     </Fragment>
   );
 };
+
 
 Profile.propTypes = {
   getProfileById: PropTypes.func.isRequired,
