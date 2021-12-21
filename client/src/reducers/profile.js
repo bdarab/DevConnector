@@ -25,6 +25,7 @@ export default function (state = initialState, action) {
         profile: payload,
         loading: false
       };
+    
     case UPDATE_PROFILE:
       return {
         ...state,
