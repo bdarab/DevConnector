@@ -22,9 +22,10 @@ export default function (state = initialState, action) {
     case GET_PROFILE:
       return {
         ...state,
-        profiles: payload,
+        profile: payload,
         loading: false
       };
+    
     case UPDATE_PROFILE:
       return {
         ...state,
@@ -41,14 +42,14 @@ export default function (state = initialState, action) {
       return {
         ...state,
         error: payload,
-        loading: false
+        loading: false,
+        profile: null
       };
     case CLEAR_PROFILE:
       return {
         ...state,
         profile: null,
         repos: [],
-        loading: false
       };
     case GET_REPOS:
       return {
