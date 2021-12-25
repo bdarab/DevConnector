@@ -19,6 +19,7 @@ import store from './store';
 import { loadUser } from './actions/auth';
 import setAuthToken from './utils/setAuthToken';
 import Profile from './components/profile/Profile';
+import Posts from './components/posts/Posts';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -49,10 +50,6 @@ const App = () => {
                 element={<PrivateRoute component={Dashboard} />}
               />
               <Route
-                path="/create-profile"
-                element={<PrivateRoute component={ProfileForm} />}
-              />
-              <Route
                 path="/edit-profile"
                 element={<PrivateRoute component={ProfileForm} />}
               />
@@ -63,6 +60,10 @@ const App = () => {
               <Route
                 path="/add-education"
                 element={<PrivateRoute component={AddEducation} />}
+              />
+              <Route
+                path="/posts"
+                element={<PrivateRoute component={Posts} />}
               />
             </Routes>
           </section>
