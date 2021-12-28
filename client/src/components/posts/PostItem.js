@@ -45,7 +45,7 @@ const PostItem = ({
         )}
       </Link>
       {!auth.loading && user === auth.user._id && (
-        <button type="button" class="btn btn-danger">
+        <button type="button" className="btn btn-danger">
           <i className="fas fa-times"></i>
         </button>
       )}
