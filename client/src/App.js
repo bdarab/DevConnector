@@ -50,6 +50,10 @@ const App = () => {
                 element={<PrivateRoute component={Dashboard} />}
               />
               <Route
+                path="create-profile"
+                element={<PrivateRoute component={ProfileForm} />}
+              />
+              <Route
                 path="/edit-profile"
                 element={<PrivateRoute component={ProfileForm} />}
               />
