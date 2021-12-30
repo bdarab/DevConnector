@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { addPost } from '../../actions/post';
 
 const PostForm = ({ addPost }) => {
-  const { text, setText } = useState('');
+  const [text, setText] = useState('');
   return (
     <div className="post-form">
       <div className="bg-primary p">
