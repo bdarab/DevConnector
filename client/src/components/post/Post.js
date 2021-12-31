@@ -7,7 +7,7 @@ import { getPost } from '../../actions/post';
 import PostItem from '../posts/PostItem';
 
 const Post = ({ getPost, post: { post, loading } }) => {
-  const id = useParams();
+  const { id } = useParams();
   useEffect(() => {
     getPost(id);
   }, [getPost, id]);
@@ -15,7 +15,10 @@ const Post = ({ getPost, post: { post, loading } }) => {
   return loading || post === null ? (
     <Spinner />
   ) : (
-    <Fragment>
+      <Fragment>
+        <Link to="/posts" className='btn '>
+          Back To Posts
+        </Link>
       <PostItem post={post} showActions={false} />
     </Fragment>
   );
