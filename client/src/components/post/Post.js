@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import Spinner from '../layout/Spinner';
 import { getPost } from '../../actions/post';
+import PostItem from '../posts/PostItem';
 
 const Post = ({ getPost, post: { post, loading } }) => {
   const id = useParams();
@@ -11,7 +12,13 @@ const Post = ({ getPost, post: { post, loading } }) => {
     getPost(id);
   }, [getPost, id]);
 
-  return <div>Post</div>;
+  return loading || post === null ? (
+    <Spinner />
+  ) : (
+    <Fragment>
+      <PostItem post={post} showActions={false} />
+    </Fragment>
+  );
 };
 
 Post.propTypes = {
